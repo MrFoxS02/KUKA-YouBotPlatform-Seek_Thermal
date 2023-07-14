@@ -1,29 +1,29 @@
 # KUKA-YouBotPlatform-Seek_Thermal
 
-## Описание
+## Description
 
-KUKA-YouBotPlatform-Seek_Thermal — это драйвер пользовательского пространства для тепловизора SEEK THERMAL COMPACT, построенный на libusb и libopencv.
+KUKA-YouBotPlatform-Seek_Thermal — is a user space driver for the SEEK THERMAL COMPACT thermal imager built on libusb and libopencv.
 
-Поддерживаемые камеры:
+Supported cameras:
 * [Seek Thermal Compact](http://www.thermal.com/products/compact)
 
 
-**ПРИМЕЧАНИЕ. Библиотека не поддерживает вывод абсолютного показания температуры и ограничивается выводом термограммы**
+**NOTE. The library does not support the output of absolute temperature readings and is limited to the output of thermograms**
 
 
-## Заимствования
+## Borrowing
 
-Код основан на идее из следующего репозитория:
+The code is based on an idea from the following repository:
 * https://github.com/coaco-robot/libseek-thermal
 
-## Сборка
+## Building
 
-Зависимости:
+Dependencies:
 * cmake
 * libopencv-dev (>= 2.4)
 * libusb-1.0-0-dev
 
-ПРИМЕЧАНИЕ: вы можете просто «apt-get install» все вышеперечисленные библиотеки
+NOTE: you can just "apt-get install" all of the above libraries
 
 ```
 cd libseek-thermal
@@ -33,31 +33,31 @@ cmake ..
 make
 ```
 
-Установите разделяемую библиотеку, заголовки и двоичные файлы:
+Install the shared library, headers and binaries files:
 
 ```
 sudo make install
 sudo ldconfig 
 ```
 
-## Запуск примеров
+## Running examples
 
 ```
-./examples/seek_viewer     # Получение поточного изображения с камеры
-./examples/seek_snapshot   # Получение единичного изображения с камеры
+./examples/seek_viewer     # Getting a streaming image from a camera
+./examples/seek_snapshot   # Getting a single image from a camera
 ```
 
 ### seek_viewer
-seek_viewer — это программное решение для постоянного сохранения термограммы в процессе работы. Программа поддерживает поворот изображения, масштабирование и сопоставление цветов с использованием любой из цветовых карт OpenCV.
+seek_viewer — this is a software solution for permanently saving a thermogram in the process of work. The program supports image rotation, scaling and color matching using any of the OpenCV color maps.
 
 ```
 seek_viewer --camtype=seekpro --colormap=11 --rotate=0                          # view color mapped thermal video
 ```
 
 ### seek_snapshot
-seek_snapshot делает единичное изображения. Это полезно для интеграции в сценарии оболочки. Программа поддерживает вращение и сопоставление цветов так же, как seek_viewer.
+seek_snapshot makes a single image. This is useful for integrating into shell scripts. The program supports rotation and color matching just like seek_viewer.
 
 ## Python_Seek_Thermal
 
-Python_Seek_Thermal - это программное решение которое позволяет получить изображение с тепловизора установленного на роботе KUKA YouBot Platform при помощи стека (time, cv2, paramico)
-ПРИМЕЧАНИЕ: в представленном решении изображение постоянно сохраняется на роботе т.к. linux server не позволяет отображать медиафайлы. Ввиду этого при помощи библиотеки paramico при помощи ssh происходит постоянный забор файла с робота на ПК пользователя.
+Python_Seek_Thermal is a software solution that allows you to get an image from a thermal imager installed on a KUKA YouBot Platform robot using a stack (time, cv2, paramico)
+NOTE: in the presented solution, the image is permanently saved on the robot because linux server does not allow media files to be displayed. In view of this, using the paramico library using ssh, the file is constantly taken from the robot to the user's PC.
